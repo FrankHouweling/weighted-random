@@ -159,7 +159,7 @@ final class WeightedRandomGenerator
     {
         Assertion::notEq($sampleCount,0, 'The sample count should be higher then 0.');
 
-        for ($i = 0; $i <= $sampleCount; $i++)
+        for ($i = 0; $i < $sampleCount; $i++)
         {
             yield $this->generate();
         }
@@ -182,15 +182,9 @@ final class WeightedRandomGenerator
         );
 
         $returnedCollection = [];
-        $count = 0;
         while (count($returnedCollection) < $sampleCount)
         {
-            $count++;
             $sample = $this->generate();
-            if ($count >= 100)
-            {
-                return;
-            }
             if (in_array($sample, $returnedCollection, true))
             {
                 continue;

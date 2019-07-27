@@ -101,4 +101,81 @@ final class WeightedRandomGeneratorTest extends TestCase
 
         $this->generator->registerValues(['test' => 0]);
     }
+
+    /**
+     * Remove a registered value.
+     */
+    public function testRemoveValue()
+    {
+        $value = new \stdClass();
+        $this->generator->registerValue($value);
+        $this->generator->removeValue($value);
+
+        $registeredValues = iterator_to_array($this->generator->getWeightedValues());
+        $this->assertEquals(0, count($registeredValues));
+    }
+
+    /**
+     * Try to remove a unregistered value.
+     */
+    public function testRemoveUnregisteredValue()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->generator->removeValue(new \stdClass());
+    }
+
+    /**
+     * Try to remove a registered weighted value.
+     */
+    public function testRemoveWeightedValue()
+    {
+        $value = new \stdClass();
+        $weightedValue = new WeightedValue($value, 2);
+        $this->generator->registerWeightedValue($weightedValue);
+        $this->generator->removeWeightedValue($weightedValue);
+
+        $registeredValues = iterator_to_array($this->generator->getWeightedValues());
+        $this->assertEquals(0, count($registeredValues));
+    }
+
+    /**
+     * Test that generate multiple can and will return the same value multiple times.
+     */
+    public function testGenerateMultipleDuplicateValues()
+    {
+        $registeredValue = new \stdClass();
+        $this->generator->registerValue($registeredValue);
+
+        $values = iterator_to_array($this->generator->generateMultiple(10));
+
+        $this->assertCount(10, $values);
+        foreach ($values as $value)
+        {
+            $this->assertEquals($value, $registeredValue);
+        }
+    }
+
+    /**
+     * Test the generateMultipleWithoutDuplicates for removing duplicate items from the results.
+     */
+    public function testGenerateMultipleNoDuplicateValues()
+    {
+        $registeredValues = [
+            '1' => 1,
+            '2' => 1,
+            '3' => 1,
+        ];
+        $this->generator->registerValues($registeredValues);
+
+        // Mock random number generator to return the first item twice, then return items two and three.
+        $mockRandomNumberGenerator = $this->createPartialMock(\stdClass::class, ['__invoke']);
+        $mockRandomNumberGenerator->method('__invoke')
+            ->withAnyParameters()
+            ->will($this->onConsecutiveCalls(1,1,2,3));
+
+        $this->generator->setRandomNumberGenerator($mockRandomNumberGenerator);
+
+        $sample = iterator_to_array($this->generator->generateMultipleWithoutDuplicates(count($registeredValues)));
+        $this->assertEquals(array_keys($registeredValues), $sample);
+    }
 }
