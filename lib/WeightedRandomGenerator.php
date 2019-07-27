@@ -55,8 +55,7 @@ final class WeightedRandomGenerator
      */
     public function registerValues(array $valueCollection): void
     {
-        foreach ($valueCollection as $value => $weight)
-        {
+        foreach ($valueCollection as $value => $weight) {
             Assertion::integer($weight, 'Weight should be a whole number.');
             $this->registerValue($value, $weight);
         }
@@ -80,8 +79,7 @@ final class WeightedRandomGenerator
     public function removeValue($value): void
     {
         $key = $this->getExistingValueKey($value);
-        if ($key === null)
-        {
+        if ($key === null) {
             throw new \InvalidArgumentException('Given value is not registered.');
         }
         unset($this->values[$key], $this->weights[$key]);
@@ -105,8 +103,7 @@ final class WeightedRandomGenerator
      */
     public function getWeightedValues(): \Generator
     {
-        foreach ($this->values as $key => $value)
-        {
+        foreach ($this->values as $key => $value) {
             yield new WeightedValue(
                 $value,
                 $this->weights[$key]
@@ -123,8 +120,7 @@ final class WeightedRandomGenerator
     public function getWeightedValue($value): WeightedValue
     {
         $key = $this->getExistingValueKey($value);
-        if ($key === null)
-        {
+        if ($key === null) {
             throw new \InvalidArgumentException('Given value is not registered.');
         }
         return new WeightedValue(
@@ -145,10 +141,8 @@ final class WeightedRandomGenerator
         $totalWeightCount = $this->getTotalWeightCount();
         $randomNumberGenerator = $this->randomNumberGenerator;
         $randomValue = $randomNumberGenerator(0, $totalWeightCount);
-        foreach ($this->weights as $key => $weight)
-        {
-            if ($weight >= $randomValue)
-            {
+        foreach ($this->weights as $key => $weight) {
+            if ($weight >= $randomValue) {
                 return $this->values[$key];
             }
             $randomValue -= $weight;
@@ -165,10 +159,9 @@ final class WeightedRandomGenerator
      */
     public function generateMultiple(int $sampleCount): \Generator
     {
-        Assertion::notEq($sampleCount,0, 'The sample count should be higher then 0.');
+        Assertion::notEq($sampleCount, 0, 'The sample count should be higher then 0.');
 
-        for ($i = 0; $i < $sampleCount; $i++)
-        {
+        for ($i = 0; $i < $sampleCount; $i++) {
             yield $this->generate();
         }
     }
@@ -182,7 +175,7 @@ final class WeightedRandomGenerator
      */
     public function generateMultipleWithoutDuplicates(int $sampleCount): \Generator
     {
-        Assertion::notEq($sampleCount,0, 'The sample count should be higher then 0.');
+        Assertion::notEq($sampleCount, 0, 'The sample count should be higher then 0.');
         Assertion::lessOrEqualThan(
             $sampleCount,
             count($this->values),
@@ -190,11 +183,9 @@ final class WeightedRandomGenerator
         );
 
         $returnedCollection = [];
-        while (count($returnedCollection) < $sampleCount)
-        {
+        while (count($returnedCollection) < $sampleCount) {
             $sample = $this->generate();
-            if (in_array($sample, $returnedCollection, true))
-            {
+            if (in_array($sample, $returnedCollection, true)) {
                 continue;
             }
             $returnedCollection[] = $sample;
@@ -222,8 +213,7 @@ final class WeightedRandomGenerator
      */
     private function getValueKey($value): int
     {
-        if (in_array($value, $this->values, true) === false)
-        {
+        if (in_array($value, $this->values, true) === false) {
             $this->values[] = $value;
         }
         return $this->getExistingValueKey($value);
@@ -249,8 +239,7 @@ final class WeightedRandomGenerator
     private function getExistingValueKey($value): ?int
     {
         $key = array_search($value, $this->values, true);
-        if ($key === false)
-        {
+        if ($key === false) {
             return null;
         }
         return $key;
@@ -273,11 +262,9 @@ final class WeightedRandomGenerator
      */
     private function getTotalWeightCount(): int
     {
-        if ($this->totalWeightCount === null)
-        {
+        if ($this->totalWeightCount === null) {
             $count = 0;
-            foreach ($this->weights as $key => $weight)
-            {
+            foreach ($this->weights as $key => $weight) {
                 $count += $weight;
             }
             $this->totalWeightCount = $count;
