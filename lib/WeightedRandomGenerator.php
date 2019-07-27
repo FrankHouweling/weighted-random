@@ -19,7 +19,7 @@ final class WeightedRandomGenerator
     /** @var array|int[] */
     private $weights = [];
 
-    /** @var string */
+    /** @var int|null */
     private $totalWeightCount;
 
     /** @var callable */
@@ -99,7 +99,7 @@ final class WeightedRandomGenerator
     /**
      * Return a generator that generated WeightedValue instances for all registered values.
      *
-     * @return \Generator|WeightedValue[]
+     * @return \Generator
      */
     public function getWeightedValues(): \Generator
     {
@@ -216,7 +216,7 @@ final class WeightedRandomGenerator
         if (in_array($value, $this->values, true) === false) {
             $this->values[] = $value;
         }
-        return $this->getExistingValueKey($value);
+        return $this->getExistingValueKey($value) ?? 0;
     }
 
     /**
