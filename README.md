@@ -159,8 +159,6 @@ $generator->registerValue('bar', 2);
 
 // Because we have registered two values, both with a weight of 2, the chance of foo and bar is both 50%.
 echo $generator->generate() . PHP_EOL;
-$generator->generateMultiple();
-$generator->generateMultipleWithoutDuplicates()
 ```
 
 You can also generate a sample of multiple values using the generateMultiple method, and a set of multiple 

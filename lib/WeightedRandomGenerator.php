@@ -7,6 +7,9 @@ use Assert\Assertion;
 
 /**
  * Class WeightedRandomGenerator
+ *
+ * Generate a random value out of a set of registered values, where the probability of generating the value is
+ * determined by the given weight. The probability grows linearly with the set weight.
  */
 final class WeightedRandomGenerator
 {
@@ -31,7 +34,7 @@ final class WeightedRandomGenerator
     }
 
     /**
-     * Add or update a possible return value for the weighted random generator.
+     * Register (add or update) a possible return value for the weighted random generator.
      *
      * @param mixed $value The possible return value.
      * @param int $weight Weight of the possibility of getting this value as a whole number.
@@ -70,6 +73,8 @@ final class WeightedRandomGenerator
     }
 
     /**
+     * Remove a value from the generator. After removing the value, it will not be returned by calling generate.
+     *
      * @param $value
      */
     public function removeValue($value): void
@@ -84,6 +89,8 @@ final class WeightedRandomGenerator
     }
 
     /**
+     * Remove a value from the generator. After removing the value, it will not be returned by calling generate.
+     *
      * @param WeightedValue $weightedValue
      */
     public function removeWeightedValue(WeightedValue $weightedValue): void
@@ -108,6 +115,8 @@ final class WeightedRandomGenerator
     }
 
     /**
+     * Get the WeightedValue valueobject with the value and weight for a given value.
+     *
      * @param $value
      * @return WeightedValue
      */
@@ -205,6 +214,9 @@ final class WeightedRandomGenerator
     }
 
     /**
+     * Get a valuekey for the given value. This is the existing key if the value was already registered. If the value
+     * was not registered yet, the value is stored and the key returned.
+     *
      * @param $value
      * @return int
      */
@@ -229,6 +241,8 @@ final class WeightedRandomGenerator
     }
 
     /**
+     * Get the key for a given value, or NULL when the value was not yet registered.
+     *
      * @param $value
      * @return int|null
      */
@@ -243,7 +257,7 @@ final class WeightedRandomGenerator
     }
 
     /**
-     *
+     * Reset the total weight count. Should be called when a value is added/removed or when it's weight has changed.
      */
     private function resetTotalWeightCount(): void
     {
@@ -251,6 +265,10 @@ final class WeightedRandomGenerator
     }
 
     /**
+     * Return the total weight of all values that are registered.
+     *
+     * Cached in self::totalWeightCount, and only recalculated when necessary.
+     *
      * @return int
      */
     private function getTotalWeightCount(): int
