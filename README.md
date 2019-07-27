@@ -125,8 +125,7 @@ $generator->registerValues([
 ]);
 
 // Retrieve all registered values
-foreach ($generator->getWeightedValues() as $weightedValue)
-{
+foreach ($generator->getWeightedValues() as $weightedValue) {
     echo sprintf(
         '%s => %s',
         $weightedValue->getValue(),
@@ -175,14 +174,12 @@ $generator->registerValues([
 ]);
 
 // Can return foo + bar, bar + foo, foo + foo or bar + bar.
-foreach ($generator->generateMultiple(2) as $value)
-{
+foreach ($generator->generateMultiple(2) as $value) {
     echo $value . PHP_EOL;
 }
 
 // Can return foo + bar or bar + foo
-foreach ($generator->generateMultipleWithoutDuplicates(2) as $value)
-{
+foreach ($generator->generateMultipleWithoutDuplicates(2) as $value) {
     echo $value . PHP_EOL;
 }
 
