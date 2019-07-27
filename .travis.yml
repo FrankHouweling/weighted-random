@@ -13,9 +13,9 @@ install:
 script:
   - phpunit --coverage-clover=coverage.xml
   - vendor/bin/phpcs lib/ --standard=PSR1,PSR2,PSR12
+  - ./vendor/bin/psalm
 
 #after_script:
-
 after_success:
   # Submit coverage report to https://codecov.io
   - bash <(curl -s https://codecov.io/bash)
