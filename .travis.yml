@@ -1,9 +1,7 @@
 language: php
 php:
-  - '7.1'
   - '7.2'
   - '7.3'
-  - '7.4'
 
 # Note: Code coverage requires php-xDebug extension enabled on CI server
 
@@ -12,7 +10,7 @@ install:
 
 # Testing the app (see phpunit.xml) for configs, generating Code Coverage report
 script:
-  - composer test -- --coverage-clover=coverage.xml
+  - phpunit --coverage-clover=coverage.xml
 
 #after_script:
 
