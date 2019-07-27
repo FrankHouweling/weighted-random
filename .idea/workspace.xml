@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ddb1315-3a19-4498-a65d-4ae4ddbd1ee0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ci/docker-install.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gitlab-ci.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/WeightedValue.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/WeightedRandomGeneratorTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gitlab-ci.yml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,6 +85,7 @@
   </component>
   <component name="ProjectId" id="1Ob3WckZwZmVHN8KOvJWDWGDnLF" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
@@ -121,7 +119,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564232502086</updated>
-      <workItem from="1564232504788" duration="6108000" />
+      <workItem from="1564232504788" duration="7035000" />
     </task>
     <servers />
   </component>
