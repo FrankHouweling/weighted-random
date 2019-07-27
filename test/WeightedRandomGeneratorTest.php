@@ -178,4 +178,13 @@ final class WeightedRandomGeneratorTest extends TestCase
         $sample = iterator_to_array($this->generator->generateMultipleWithoutDuplicates(count($registeredValues)));
         $this->assertEquals(array_keys($registeredValues), $sample);
     }
+
+    /**
+     * Test getting a weighted value for a non existing value, which should result in an invalid argument exception
+     */
+    public function testGetNonExistingWeightedValue()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->generator->getWeightedValue(new \stdClass());
+    }
 }

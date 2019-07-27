@@ -144,7 +144,6 @@ final class WeightedRandomGenerator
             }
             $randomValue -= $weight;
         }
-        throw new \LogicException('Generated random value is larger than the sum of weights.');
     }
 
     /**
