@@ -1,0 +1,26 @@
+{
+  "name": "frank-houweling/weighted-random",
+  "description": "Library for generating a weighted random sample",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "weighted",
+    "random",
+    "sampling"
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^7.1",
+    "beberlei/assert": "^3.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "FrankHouweling\\WeightedRandom\\": "lib/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8"
+  }
+}
